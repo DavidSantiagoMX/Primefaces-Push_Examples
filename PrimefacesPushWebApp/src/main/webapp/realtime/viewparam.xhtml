@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+
+<f:metadata>
+    <f:viewParam name="data" value="#{viewParamPush.data}" />
+    <f:event type="preRenderView" listener="#{viewParamPush.prerender}" />
+</f:metadata>
+ 
+<h:outputText id="out" value="#{viewParamPush.data}" style="font-size:16px" />
+ 
+<p:socket onMessage="handleMessage" channel="/viewparam" />
+ 
+<script type="text/javascript">
+        function handleMessage(data) {
+            $('#out').text(data);
+        }
+</script>
+</h:body>
+</html>
